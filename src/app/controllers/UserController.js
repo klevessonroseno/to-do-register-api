@@ -20,7 +20,7 @@ class UserController {
                 where: { email: req.body.email }
             });
     
-            if(userExists) return res.status(400).json({
+            if(userExists) return res.status(409).json({
                 error: 'User email must be unique'
             });
     
