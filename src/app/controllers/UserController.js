@@ -4,12 +4,6 @@ import * as Yup from 'yup';
 class UserController {
     async store(req, res){
         try {
-            const { password_hash } = req.body;
-
-            if(password_hash) return res.status(400).json({
-                error: 'Do not pass password_hash'
-            });
-
             const schema = Yup.object().shape({
                 name: Yup.string().required(),
                 email: Yup.string().email().required(),
@@ -34,6 +28,14 @@ class UserController {
     
             res.status(201).json({ id, name, email, provider });
 
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    async update(req, res){
+        try {
+            
         } catch (error) {
             res.status(500).json(error);
         }
