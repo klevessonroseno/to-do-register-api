@@ -4,6 +4,12 @@ import * as Yup from 'yup';
 class UserController {
     async store(req, res){
         try {
+            const { password_hash } = req.body;
+
+            if(password_hash) return res.status(400).json({
+                error: 'Do not pass password_hash'
+            });
+
             const schema = Yup.object().shape({
                 name: Yup.string().required(),
                 email: Yup.string().email().required(),
@@ -11,7 +17,9 @@ class UserController {
             });
 
             if(!(await schema.isValid(req.body))){
-                return res.status(400).json({ error: 'Validation Fails' });    
+                return res.status(400).json({
+                    error: 'Validation Fails'
+                });    
             }
 
             const userExists = await User.findOne({
