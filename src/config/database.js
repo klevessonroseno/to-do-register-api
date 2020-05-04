@@ -1,8 +1,8 @@
 module.exports = {
-    dialect: 'mysql',
+    dialect: 'postgres',
     host: 'localhost',
-    username: 'root',
-    password: '',
+    username: 'postgres',
+    password: 'docker',
     database: 'to_do_register',
     define: {
         timestamps: true,
